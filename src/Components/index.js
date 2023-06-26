@@ -6,3 +6,4 @@ export { default as MovieInformation } from './MovieInformation/MovieInformation
 export { default as SideBar } from './SideBar/SideBar.jsx'
 export { default as MovieList } from './MovieList/MovieList.jsx'
 export { default as Movie } from './Movie/Movie.jsx'
+export { default as Search } from './Search/Search.jsx'
