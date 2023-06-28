@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetMovieQuery } from '../../services/TMDB'
+import { useGetMovieQuery, useGetRecommendationsQuery } from '../../services/TMDB'
 import { Modal, Typography, Box, Button, ButtonGroup, Grid, CircularProgress, useMediaQuery, Rating } from '@mui/material'
 import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOutlined, Remove, ArrowBack } from '@mui/icons-material'
 import { Link, useParams } from 'react-router-dom'
@@ -8,13 +8,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { ClassNames } from '@emotion/react'
 import useStyles from './styles'
+import { useState } from 'react'
+import { MovieList } from '..'
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
+
+
+const addToFavorites = () => { };
+const addToWatchList = () => { }
 
 const MovieInformation = () => {
   const { id } = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: id });
+  const [open, setOpen] = useState(false);
   const { data, isFetching, error } = useGetMovieQuery(id);
+
+  const [isMovieFavorited, setIsMovieFavorited] = useState(false);
+  const [isMovieWatchlisted, setIsMovieWatchlisted] = useState(false);
 
   if (isFetching) {
     <Box display='flex' justifyContent='center' alignItems="center">
@@ -86,7 +97,58 @@ const MovieInformation = () => {
               )
             )).slice(0, 6)}
           </Grid>
+          <Grid item container style={{ marginTop: '2rem' }}>
+            <div className={classes.buttonsContainer} >
+              <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
+                <ButtonGroup size="small" variant="outlined">
+                  <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>
+                    Website
+                  </Button>
+                  <Button target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`} endIcon={<MovieIcon />}>
+                    IMDB
+                  </Button>
+                  <Button onClick={() => setOpen(true)} href="#" endIcon={<Theaters />}>
+                    Trailer
+                  </Button>
+                </ButtonGroup>
+              </Grid>
+              <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
+                <ButtonGroup size="small" variant="outlined">
+                  <Button onClick={addToFavorites} endIcon={isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />}>
+                    {isMovieFavorited ? 'Unfavorite' : 'Favorite'}
+                  </Button>
+                  <Button onClick={addToWatchList} endIcon={isMovieWatchlisted ? <Remove /> : <PlusOne />}>
+                    Watchlist
+                  </Button>
+                  <Button endIcon={<ArrowBack />} sx={{ borderColor: 'primary.main' }}>
+                    <Typography variant="subtitle2" component={Link} to="/" color="inherit" sx={{ textDecoration: 'none' }}>
+                      Back
+                    </Typography>
+                  </Button>
+                </ButtonGroup>
+              </Grid>
+            </div>
+          </Grid>
         </Grid>
+        <Box marginTop="5rem" width="100%">
+          <Typography variant="h3" gutterBottom align='center'>
+            Similar Movies you might enjoy
+          </Typography>
+          {recommendations ? <MovieList movies={recommendations} numberOfMovies={12} /> : <Box>Sorry, no matches were found. </Box>}
+        </Box>
+        {data?.videos?.results.length > 0 && (
+          <Modal closeAfterTransition className={classes.modal} open={open} onClose={() => setOpen(false)}>
+            <iframe
+              autoPlay
+              className={classes.video}
+              frameBorder="0"
+              title="Trailer"
+              src={`https://www.youtube.com/embed/${data?.videos?.results[0].key}`}
+              allow="autoplay"
+            />
+          </Modal>
+        )}
+       
       </Grid>
     </>
   )

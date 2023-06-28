@@ -20,8 +20,6 @@ const NavBar = () => {
     const token = localStorage.getItem('request_token');
     const sessionIdFromLocalStorage = localStorage.getItem('session_id');
 
-    console.log(user);
-
     useEffect(() => {
         const logInUser = async () => {
             if (token) {
