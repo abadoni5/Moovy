@@ -10,6 +10,8 @@ import useStyles from "./styles.js";
 import { useGetGenresQuery } from "../../services/TMDB.js";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
+import lightLogo from "../../assets/Logos/lightLogo.png";
+import darkLogo from "../../assets/Logos/darkLogo.png";
 
 const categories = [
   { label: "Popular", value: "popular" },
@@ -17,10 +19,6 @@ const categories = [
   { label: "Upcoming", value: "upcoming" },
 ];
 
-const redLogo =
-  "https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png";
-const blueLogo =
-  "https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png";
 
 const SideBar = ({ setMobileOpen }) => {
   const {genreIdOrCategoryName} = useSelector((state) => state.currentGenreOrCategory);
@@ -34,7 +32,7 @@ const SideBar = ({ setMobileOpen }) => {
     <>
       <Link to="/" className={classes.imageLink}>
         <img
-          src={theme.palette.mode === "light" ? redLogo : blueLogo}
+          src={theme.palette.mode === "light" ? lightLogo : darkLogo }
           alt="Filmpire Logo"
           className={classes.image}
         />
@@ -46,7 +44,7 @@ const SideBar = ({ setMobileOpen }) => {
           <Link key={value} className={classes.links} to="/">
             <ListItem onClick={() => dispatch(selectGenreOrCategory(value))} button>
               <ListItemIcon>
-                    <img src={genreIcons[label.toLowerCase()]} height={30} className={classes.genreImages} />
+                    <img src={genreIcons[label.toLowerCase()]} height={30} className={classes.genreImage} />
               </ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>
@@ -68,7 +66,7 @@ const SideBar = ({ setMobileOpen }) => {
                   <img
                     src={genreIcons[name.toLowerCase()]}
                     height={30}
-                    className={classes.genreImages}
+                    className={classes.genreImage}
                   />
                 </ListItemIcon>
                 <ListItemText primary={name} />

@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { SideBar } from '..';
 import { useDispatch, useSelector } from 'react-redux'; 
 import useStyles from './styles';
+import { colorModeContext } from '../../utils/ToggleColorMode';
 import { setUser, userSelector } from '../../Features/auth';
 import { fetchToken, createSessionId, moviesApi } from '../../utils';
 import { Search } from '../';
@@ -19,6 +20,7 @@ const NavBar = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
     const token = localStorage.getItem('request_token');
     const sessionIdFromLocalStorage = localStorage.getItem('session_id');
+    const colorMode = useContext(colorModeContext);
 
     useEffect(() => {
         const logInUser = async () => {
@@ -53,7 +55,7 @@ const NavBar = () => {
                     <IconButton
                         color="inherit"
                         sx={{ ml: 1 }}
-                        onClick={() => { }}
+                        onClick={colorMode.toggleColorMode}
                     >
                         {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
                     </IconButton>
