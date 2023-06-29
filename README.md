@@ -1,6 +1,14 @@
+<img width="1429" alt="Screenshot 2023-06-29 at 11 52 59 PM" src="https://github.com/abadoni5/Moovy/assets/89126072/224ed724-306f-4bac-b8f4-75f45b578497">
+
+
 # Moovy
 
 Moovy is a responsive web application that provides information about movies and serves as a forum for movie lovers. It utilizes React, Redux, Material-UI, and the TMDB API to deliver a seamless and interactive movie browsing experience. The app is designed for mobile and desktop platforms, ensuring accessibility for users on various devices.
+
+## Deployable Link: https://moovy-abadoni5.netlify.app
+
+<img width="1440" alt="Screenshot 2023-06-29 at 11 52 19 PM" src="https://github.com/abadoni5/Moovy/assets/89126072/c4352ec5-748f-4033-b540-d052039195f2">
+
 
 ## Features
 
