@@ -8,6 +8,7 @@ export default makeStyles((theme) => ({
     },
     button: {
         margin: '30px 2px',
+        backgroundColor: theme.palette.mode === 'dark' ? 'white !important' : 'black !important',
     },
     pageNumber: {
         margin: '0 20px !important',

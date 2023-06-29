@@ -72,4 +72,7 @@ export default makeStyles((theme) => ({
             height: '90%',
         },
     },
+    buttons: {
+        color: theme.palette.mode === 'dark' ? 'white !important' : 'black !important',
+    },
 }));

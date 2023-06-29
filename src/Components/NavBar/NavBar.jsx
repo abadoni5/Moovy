@@ -41,7 +41,7 @@ const NavBar = () => {
 
     return (
         <>
-            <AppBar position="fixed">
+            <AppBar sx={{backgroundColor: 'black'} } position="fixed">
                 <Toolbar className={classes.toolbar}>
                     {isMobile && (
                         <IconButton color="inherit"

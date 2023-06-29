@@ -46,8 +46,8 @@ const Actors = () => {
           <Typography variant="h5" gutterBottom>Born: {new Date(data?.birthday).toDateString()}</Typography>
           <Typography variant="body1" align="justify" paragraph>{data?.biography || 'Sorry, no biography yet...'}</Typography>
           <Box className={classes.btns}>
-            <Button variant="contained" color="primary" target="_blank" href={`https://www.imdb.com/name/${data?.imdb_id}`}>IMDB</Button>
-            <Button startIcon={<ArrowBack />} onClick={() => navigate(-1)} color="primary">Back</Button>
+            <Button variant="contained" color="primary" target="_blank" sx={{ backgroundColor: 'black !important' }} href={`https://www.imdb.com/name/${data?.imdb_id}`}>IMDB</Button>
+            <Button sx={{color: 'black !important'}} startIcon={<ArrowBack />} onClick={() => navigate(-1)} color="primary">Back</Button>
           </Box>
         </Grid>
       </Grid>
