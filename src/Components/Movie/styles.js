@@ -27,11 +27,12 @@ export default makeStyles((theme) => ({
         },
     },
     image: {
-        borderRadius: '20px',
+        borderRadius: '10px',
         height: '300px',
         marginBottom: '10px',
         '&:hover': {
             transform: 'scale(1.05)',
+            transition: 'transform 0.2s ease-in',
         },
     },
 }));
