@@ -90,7 +90,7 @@ const MovieInformation = () => {
               <Typography variant='subtitle1' sx={{ marginLeft: '10px' }} gutterBottom>{Math.round(data?.vote_average * 10) / 10}/10</Typography>
             </Box>
             <Typography variant="h6" align="center" gutterBottom>
-              {data?.runtime}min | Language: {data?.spoken_languages[0].name}
+              {data?.runtime}min | Language: {data?.spoken_languages.length > 0 && (data?.spoken_languages[0].name) }
             </Typography>
           </Grid>
           <Grid item className={classes.genresContainer}>
@@ -170,7 +170,8 @@ const MovieInformation = () => {
           <Typography variant="h3" gutterBottom align='center'>
             Similar Movies you might enjoy
           </Typography>
-          {recommendations ? <MovieList movies={recommendations} numberOfMovies={12} /> : <Box>Sorry, no matches were found. </Box>}
+
+          {recommendations?.results?.length > 0 ? <MovieList movies={recommendations} numberOfMovies={12} /> : <Box sx={{display: "flex", justifyContent: "space-around"} }>Sorry, no matches were found. </Box>}
         </Box>
         {data?.videos?.results.length > 0 && (
           <Modal closeAfterTransition className={classes.modal} open={open} onClose={() => setOpen(false)}>

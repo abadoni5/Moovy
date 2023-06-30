@@ -7,6 +7,11 @@ import useStyles from './styles';
 const Movie = ({ movie, i }) => {
 
     const classes = useStyles();
+    const poster = movie.poster_path
+
+    if (!poster) {
+        return null
+    }
 
     return (
         <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.movie}>
@@ -22,9 +27,7 @@ const Movie = ({ movie, i }) => {
                         </div>
                     </Tooltip>
                 </Link>
-
             </Grow>
-
         </Grid>
     )
 }
